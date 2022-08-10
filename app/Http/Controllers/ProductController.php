@@ -30,7 +30,8 @@ class ProductController extends Controller
             'name'=>'required|max:191',
             'descrip'=>'required|max:191',
             'price'=>'required|max:191',
-            'qty'=>'required|max:191'
+            'qty'=>'required|max:191',
+            'adminId'=>'required|max:191'
         ]);
 
         $pro = new Product();
@@ -38,6 +39,7 @@ class ProductController extends Controller
         $pro->description = $req->descrip;
         $pro->price = $req->price;
         $pro->qty = $req->qty;
+        $pro->adminId = $req->adminId;
         $pro->save();
         
         return response()->json(['message'=>'Data susccesfully stored'],200);
@@ -48,7 +50,8 @@ class ProductController extends Controller
             'name'=>'required|max:191',
             'descrip'=>'required|max:191',
             'price'=>'required|max:191',
-            'qty'=>'required|max:191'
+            'qty'=>'required|max:191',
+           // 'adminId'=>'required|max:191'
         ]); 
 
         $pro = Product::find($id);
@@ -57,6 +60,7 @@ class ProductController extends Controller
             $pro->description = $req->descrip;
             $pro->price = $req->price;
             $pro->qty = $req->qty;
+            $pro->adminId = $req->adminId;
             $pro->update();
             
             return response()->json(['message'=>'Dates susccesfully updated'],200);
