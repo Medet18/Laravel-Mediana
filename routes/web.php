@@ -26,8 +26,7 @@ Route::post('/create', [UserAuthController::class,'create'])->name('auth.create'
 //////////////////
 
 Route::get('/test', function(){
-    $n = Carbon::createFromFormat('Y z', '1995 365');
-    dd($n);
+    echo strtotime("10 Sepetember 2021");
 });
 
 

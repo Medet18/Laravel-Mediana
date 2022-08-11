@@ -53,8 +53,8 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime:d-m-Y h:i:s',
-        'created_at' => 'datetime:d-m-Y h:i:s',
-        'updated_at' => 'datetime:d-m-Y h:i:s',
+        'created_at' => 'datetime:d-M-Y h:i:s a',
+        'updated_at' => 'datetime:d-m-Y h:i:s a',
     ];
     
     public function products()
