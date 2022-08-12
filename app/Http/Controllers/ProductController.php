@@ -31,7 +31,9 @@ class ProductController extends Controller
             'descrip'=>'required|max:191',
             'price'=>'required|max:191',
             'qty'=>'required|max:191',
-            'adminId'=>'required|max:191'
+            'adminId'=>'required|max:191',
+            'date_of_sale'=>'required|max:191'
+
         ]);
 
         $pro = new Product();
@@ -40,6 +42,8 @@ class ProductController extends Controller
         $pro->price = $req->price;
         $pro->qty = $req->qty;
         $pro->adminId = $req->adminId;
+        $pro->date_of_sale = Carbon::createFromFormat(('d/m/Y'),  date("d/m/Y", strtotime($req->date_of_slae)))->format('Y-m-d');
+        // $pro->date_of_sale = date("Y-m-d", strtotime($req->date_of_sale));
         $pro->save();
         
         return response()->json(['message'=>'Data susccesfully stored'],200);
@@ -55,12 +59,19 @@ class ProductController extends Controller
         ]); 
 
         $pro = Product::find($id);
+        // $myDate = date("d/m/Y", strtotime($req->date_of_slae));
+        // $date = Carbon::createFromFormat('d/m/Y', $myDate)->format('Y-m-d'); 
+            
         if($pro){
             $pro->name = $req->name;
             $pro->description = $req->descrip;
             $pro->price = $req->price;
             $pro->qty = $req->qty;
             $pro->adminId = $req->adminId;
+
+            //$myDate = date("d/m/Y", strtotime($req->date_of_slae));
+           // $dt = Carbon::create($req->date_of_sale);
+            $pro->date_of_sale = Carbon::create($req->date_of_sale)->toDateString();
             $pro->update();
             
             return response()->json(['message'=>'Dates susccesfully updated'],200);

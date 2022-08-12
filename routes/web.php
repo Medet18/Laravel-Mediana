@@ -18,7 +18,7 @@ use Carbon\Carbon;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/test2',[UserAuthController::class, 'test'])->name('test');
 Route::get('/login',[UserAuthController::class, 'login'])->name('login');
 Route::get('/register',[UserAuthController::class, 'register'])->name('register');
 Route::post('/create', [UserAuthController::class,'create'])->name('auth.create');
