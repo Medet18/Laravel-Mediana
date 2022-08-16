@@ -38,8 +38,8 @@ Route::group(['middleware'=>'api','prefix'=>'auth'], function($router){
         Route::get('products/{id}/show', [ProductController::class, 'show']);
         Route::post("productAdd", [ProductController::class, 'store']);
     
-        //Route::put('products/{id}/update', [ProductController::class, 'update']);
-        Route::post('products/{id}/update', [ProductController::class, 'update']);
+        Route::put('products/{id}/update', [ProductController::class, 'update']);
+        //Route::post('products/{id}/update', [ProductController::class, 'update']);
         Route::delete('products/{id}/delete', [ProductController::class, 'destroy']);   
     });
 
