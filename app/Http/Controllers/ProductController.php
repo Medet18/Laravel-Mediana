@@ -42,7 +42,7 @@ class ProductController extends Controller
         $pro->price = $req->price;
         $pro->qty = $req->qty;
         $pro->adminId = $req->adminId;
-        $pro->date_of_sale = Carbon::createFromFormat(('d/m/Y'),  date("d/m/Y", strtotime($req->date_of_slae)))->format('Y-m-d');
+        $pro->date_of_sale = Carbon::create($req->date_of_sale)->toDateString();
         // $pro->date_of_sale = date("Y-m-d", strtotime($req->date_of_sale));
         $pro->save();
         
@@ -59,6 +59,7 @@ class ProductController extends Controller
         ]); 
 
         $pro = Product::find($id);
+        $oldPro = Product::find($id);
         // $myDate = date("d/m/Y", strtotime($req->date_of_slae));
         // $date = Carbon::createFromFormat('d/m/Y', $myDate)->format('Y-m-d'); 
             
@@ -72,9 +73,17 @@ class ProductController extends Controller
             //$myDate = date("d/m/Y", strtotime($req->date_of_slae));
            // $dt = Carbon::create($req->date_of_sale);
             $pro->date_of_sale = Carbon::create($req->date_of_sale)->toDateString();
-            $pro->update();
+            //$pro->update();
             
-            return response()->json(['message'=>'Dates susccesfully updated'],200);
+            $newPro = $pro;
+            if($oldPro != $newPro){
+                $pro->update();
+                return response()->json(['message'=>'Dates susccesfully updated'],200);
+            }
+            else{
+                return response()->json(['message' => 'Nothing to upodate']);
+            }
+        
         }
         else{    
             return response()->json(['message'=>'No Product found'],404);
@@ -87,7 +96,7 @@ class ProductController extends Controller
         if($pro){
             $pro->delete();
             
-            return response()->json(['message'=>'Datea Deleted susccesfully'],200);
+            return response()->json(['message'=>'Data Deleted susccesfully'],200);
         }
         else{    
             return response()->json(['message'=>'No Product found'],404);

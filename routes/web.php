@@ -25,8 +25,8 @@ Route::post('/create', [UserAuthController::class,'create'])->name('auth.create'
 
 //////////////////
 
-Route::get('/test', function(){
-    echo strtotime("10 Sepetember 2021");
-});
+// Route::get('/test', function(){
+//     echo strtotime("10 Sepetember 2021");
+// });
 
 

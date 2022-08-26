@@ -7,6 +7,7 @@ use Auth;
 use App\Models\User;
 use Validator;
 use Carbon\Carbon;
+use Product\ProductController   as ProductController;
 
 
 
