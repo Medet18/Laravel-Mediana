@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Product2;
 use JWTAuth;
 use App\Models\User;
 use Carbon\Carbon;
+use Auth; 
 
 class ProductController extends Controller
 {
@@ -26,24 +28,26 @@ class ProductController extends Controller
         }
     }    
     public function store(Request $req){
-        $req->validate([
-            'name'=>'required|max:191',
-            'descrip'=>'required|max:191',
-            'price'=>'required|max:191',
-            'qty'=>'required|max:191',
-            'adminId'=>'required|max:191',
-            'date_of_sale'=>'required|max:191'
+        // $req->validate([
+        //     'name'=>'required|max:191',
+        //     'descrip'=>'required|max:191',
+        //     'price'=>'required|max:191',
+        //     'qty'=>'required|max:191',
+        //     //'adminId'=>'required|max:191',
+        //     //'date_of_sale'=>'required|max:191'
+        //     //'user_id'=>'required|max:191'
+        // ]);
 
-        ]);
-
-        $pro = new Product();
+        $pro = new Product2();
         $pro->name = $req->name;
         $pro->description = $req->descrip;
         $pro->price = $req->price;
         $pro->qty = $req->qty;
-        $pro->adminId = $req->adminId;
-        $pro->date_of_sale = Carbon::create($req->date_of_sale)->toDateString();
-        // $pro->date_of_sale = date("Y-m-d", strtotime($req->date_of_sale));
+        // $pro->adminId = $req->adminId;
+        // $pro->date_of_sale = Carbon::create($req->date_of_sale)->toDateString();
+        // // $pro->date_of_sale = date("Y-m-d", strtotime($req->date_of_sale));
+//      $pro->user_id = \Auth::id();
+
         $pro->save();
         
         return response()->json(['message'=>'Data susccesfully stored'],200);
